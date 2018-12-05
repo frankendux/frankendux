@@ -1,0 +1,31 @@
+{
+  "name": "frankendux",
+  "version": "0.0.0",
+  "description": "State management solution heavily inspired by Redux",
+  "main": "./dist/Store.js",
+  "files": [
+    "./dist/"
+  ],
+  "repository": "git@github.com:frankendux/frankendux.git",
+  "author": "Alexey Oganezov <alexey@oganezov.work>",
+  "license": "MIT",
+  "devDependencies": {
+    "rollup": "^0.67.4",
+    "rollup-plugin-terser": "^3.0.0",
+    "rollup-plugin-typescript2": "^0.18.0",
+    "tslib": "^1.9.3",
+    "tslint": "^5.11.0",
+    "tslint-config-airbnb": "^5.11.1",
+    "typescript": "^3.2.1"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "tslint": "tslint -c tslint.json 'src/**/*.ts'"
+  },
+  "peerDependencies": {
+    "wrecked-radio": "^0.0.0"
+  },
+  "dependencies": {
+    "wrecked-radio": "0.0.0"
+  }
+}
