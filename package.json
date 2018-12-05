@@ -2,9 +2,9 @@
   "name": "frankendux",
   "version": "0.0.0",
   "description": "State management solution heavily inspired by Redux",
-  "main": "./dist/Store.js",
+  "main": "dist/Store.js",
   "files": [
-    "./dist/"
+    "dist/"
   ],
   "repository": "git@github.com:frankendux/frankendux.git",
   "author": "Alexey Oganezov <alexey@oganezov.work>",
@@ -24,8 +24,5 @@
   },
   "peerDependencies": {
     "wrecked-radio": "^0.0.0"
-  },
-  "dependencies": {
-    "wrecked-radio": "0.0.0"
   }
 }
