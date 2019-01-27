@@ -16,11 +16,13 @@
     "tslib": "^1.9.3",
     "tslint": "^5.11.0",
     "tslint-config-airbnb": "^5.11.1",
+    "typedoc": "^0.14.2",
     "typescript": "^3.2.1"
   },
   "scripts": {
     "build": "rollup -c",
-    "tslint": "tslint -c tslint.json 'src/**/*.ts'"
+    "lint": "tslint -c tslint.json 'src/**/*.ts'",
+    "docs": "typedoc --out ./docs ./src"
   },
   "peerDependencies": {
     "wrecked-radio": "^0.0.0"

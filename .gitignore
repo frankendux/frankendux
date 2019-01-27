@@ -1,4 +1,6 @@
+# Library specific files and directories
 /dist
+/docs
 .rpt2_cache
 
 # Logs
