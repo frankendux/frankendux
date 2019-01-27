@@ -26,5 +26,8 @@
   },
   "peerDependencies": {
     "wrecked-radio": "^0.0.0"
+  },
+  "dependencies": {
+    "wrecked-radio": "0.0.2"
   }
 }

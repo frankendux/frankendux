@@ -9,14 +9,14 @@ export interface IStoreAction {
   payload?: any;
 }
 
-export type IActionHanler = (action: IStoreAction, section: any) => void;
+export type IActionHandler = (action: IStoreAction, section: any) => void;
 
 export interface IListenersContainer {
   [key:string]: string[];
 }
 
 export interface IActionHandlersContainer {
-  [key:string]: IActionHanler;
+  [key:string]: IActionHandler;
 }
 
 export interface IStoreParams {
