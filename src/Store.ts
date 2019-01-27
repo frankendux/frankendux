@@ -1,8 +1,3 @@
-/**
- * @module frankendux
- * @author Alexey Oganezov <alexey@oganezov.work>
- * */
-
 import { IWreckedRadio } from 'wrecked-radio';
 
 export interface IStore {
@@ -46,14 +41,11 @@ export interface IStoreSection {
  * between views (components), side-effects and this Store.
  */
 class Store {
-  private store: IStore;
-  private listeners: IListenersContainer;
-  private actionHandlers: IActionHandlersContainer;
-  private radio: IWreckedRadio;
+  private readonly store: IStore = {};
+  private readonly listeners: IListenersContainer = {};
+  private readonly actionHandlers: IActionHandlersContainer = {};
+  private readonly radio: IWreckedRadio;
   constructor(params: IStoreParams) {
-    this.store = {};
-    this.listeners = {};
-    this.actionHandlers = {};
     this.radio = params.radio;
     this.radio.getChannel('store').addRequestHandler('GET', this.getSection.bind(this));
     this.radio.getChannel('store').addRequestHandler('UPDATE', this.updateHandler.bind(this));
