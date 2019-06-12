@@ -43,20 +43,24 @@ export interface IStoreSection {
  * Usage example:
  *
  * ```
+ * // Imports
+ * import WreckedRadio from 'wrecked-radio';
+ * import Store from 'frankendux';
+ *
  * // Instantiation
  * const radio = new WreckedRadio();
  * const store = new Store({ radio });
  *
  * // Declaring a part of our application state
  * store.addSection({
- *     // Unique section name
+ *     // Unique state section name
  *     name: 'counter',
  *     // Initial section shape and values
  *     data: {
  *         dislikes: 1,
  *         likes: 3,
  *     },
- *     // Action types that this section listens and handles
+ *     // A list of action types that this section listens and handles
  *     listenTo: ['ADD_LIKE', 'ADD_DISLIKE'],
  *     // A function that performs section updates.
  *     actionHandler: (action: string, section: ICounter) => {
@@ -73,10 +77,10 @@ export interface IStoreSection {
  *     },
  * });
  *
- * // And then somewhere in our app  can we trigger a state update
+ * // Then somewhere in our app we can trigger a state update
  * radio.getChannel('store').request('UPDATE', 'ADD_LIKE');
  *
- * // Also we can get store section manually (not recommended, prefer using withStore)
+ * // Also we can get store section manually (not recommended way, prefer using withStore)
  * radio.getChannel('store').request('GET', 'counter');
  * ```
  */
