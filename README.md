@@ -1,5 +1,8 @@
 # Frankendux
 
+[![CircleCI](https://img.shields.io/circleci/build/github/frankendux/frankendux.svg)](https://circleci.com/gh/frankendux/frankendux)
+[![Coverage Status](https://img.shields.io/coveralls/github/frankendux/frankendux.svg)](https://coveralls.io/github/frankendux/frankendux)
+
 It's a state management solution that does everything that [Redux](https://github.com/reduxjs/redux) does (i.e. keeps your data in one place, manages its updates and notificates subscribers about data changes), but it makes that in a little better way:
 
 - Instead of calling every reducer on every action it calls only those of them, that are really interested in action handling
