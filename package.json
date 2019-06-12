@@ -10,6 +10,7 @@
   "author": "Alexey Oganezov <alexey@oganezov.work>",
   "license": "MIT",
   "devDependencies": {
+    "coveralls": "^3.0.4",
     "rollup": "^0.67.4",
     "rollup-plugin-terser": "^3.0.0",
     "rollup-plugin-typescript2": "^0.18.0",
