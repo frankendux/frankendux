@@ -6,21 +6,6 @@ interface ICounter {
   dislikes: number;
 }
 
-// listenTo: ['ADD_LIKE', 'ADD_DISLIKE'],
-//   actionHandler: (action: string, section: ICounter) => {
-//   if (action === 'ADD_LIKE') {
-//     return Object.assign({}, section, {
-//       likes: section.likes + 1,
-//     });
-//   }
-//   if (action === 'ADD_DISLIKE') {
-//     return Object.assign({}, section, {
-//       dislikes: section.dislikes + 1,
-//     });
-//   }
-//   return section;
-// },
-
 test('Store can return sections', () => {
   // Arrange
   const radio = new WreckedRadio();
