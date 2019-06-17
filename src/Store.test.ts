@@ -101,3 +101,58 @@ test('Store handles updates', () => {
     dislikes: 0,
   });
 });
+
+test('Store handles updates then several handlers presented', () => {
+  // Arrange
+  const radio = new WreckedRadio();
+  const store = new Store({ radio });
+  store.addSection({
+    name: 'firstCounter',
+    data: { likes: 0, dislikes: 0 },
+    listenTo: ['ADD_LIKE', 'ADD_DISLIKE'],
+    actionHandler: (action: string, section: ICounter) => {
+      if (action === 'ADD_LIKE') {
+        return Object.assign({}, section, {
+          likes: section.likes + 1,
+        });
+      }
+      if (action === 'ADD_DISLIKE') {
+        return Object.assign({}, section, {
+          dislikes: section.dislikes + 1,
+        });
+      }
+      return section;
+    },
+  });
+  store.addSection({
+    name: 'secondCounter',
+    data: { likes: 2, dislikes: 2 },
+    listenTo: ['ADD_LIKE', 'ADD_DISLIKE'],
+    actionHandler: (action: string, section: ICounter) => {
+      if (action === 'ADD_LIKE') {
+        return Object.assign({}, section, {
+          likes: section.likes + 1,
+        });
+      }
+      if (action === 'ADD_DISLIKE') {
+        return Object.assign({}, section, {
+          dislikes: section.dislikes + 1,
+        });
+      }
+      return section;
+    },
+  });
+  // Act
+  radio.channel('store').request('UPDATE', 'ADD_LIKE');
+  const firstCounter = radio.channel('store').request('GET', 'firstCounter');
+  const secondCounter = radio.channel('store').request('GET', 'secondCounter');
+  // Assert
+  expect(firstCounter).toEqual({
+    likes: 1,
+    dislikes: 0,
+  });
+  expect(secondCounter).toEqual({
+    likes: 3,
+    dislikes: 2,
+  });
+});
