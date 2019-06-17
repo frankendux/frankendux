@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="775159ee-ffee-4dac-a6e4-33174a6ab6f2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/src/Store.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Store.test.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Store.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -16,20 +15,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Store.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="518">
-              <caret line="140" column="77" selection-start-line="140" selection-start-column="77" selection-end-line="140" selection-end-column="77" />
+            <state relative-caret-position="337">
+              <caret line="63" column="44" lean-forward="true" selection-start-line="63" selection-start-column="17" selection-end-line="63" selection-end-column="44" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Store.test.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="42" column="35" selection-start-line="42" selection-start-column="35" selection-end-line="42" selection-end-column="35" />
+            <state relative-caret-position="350">
+              <caret line="95" column="53" lean-forward="true" selection-start-line="95" selection-start-column="53" selection-end-line="95" selection-end-column="53" />
               <folding>
                 <element signature="e#0#59#0" expanded="true" />
               </folding>
@@ -84,8 +83,8 @@
         <option value="$PROJECT_DIR$/src/Store.test.js" />
         <option value="$PROJECT_DIR$/node_modules/wrecked-radio/dist/WreckedRadio.js" />
         <option value="$PROJECT_DIR$/../wrecked-radio/src/Channel.ts" />
-        <option value="$PROJECT_DIR$/src/Store.test.ts" />
         <option value="$PROJECT_DIR$/src/Store.ts" />
+        <option value="$PROJECT_DIR$/src/Store.test.ts" />
       </list>
     </option>
   </component>
@@ -207,7 +206,7 @@
       <workItem from="1548584922466" duration="758000" />
       <workItem from="1548585997177" duration="1076000" />
       <workItem from="1548655836665" duration="45000" />
-      <workItem from="1560333065335" duration="8719000" />
+      <workItem from="1560333065335" duration="9328000" />
     </task>
     <servers />
   </component>
@@ -238,7 +237,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12927000" />
+    <option name="totallyTimeSpent" value="13536000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-200" y="-1080" width="1920" height="1080" extended-state="0" />
@@ -400,13 +399,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../wrecked-radio/src/WreckedRadio.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="10" selection-start-column="10" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../wrecked-radio/src/Channel.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
@@ -414,20 +406,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Store.test.ts">
+    <entry file="file://$PROJECT_DIR$/src/Store.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="42" column="35" selection-start-line="42" selection-start-column="35" selection-end-line="42" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#59#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="337">
+          <caret line="63" column="44" lean-forward="true" selection-start-line="63" selection-start-column="17" selection-end-line="63" selection-end-column="44" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Store.ts">
+    <entry file="file://$PROJECT_DIR$/../wrecked-radio/src/WreckedRadio.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="518">
-          <caret line="140" column="77" selection-start-line="140" selection-start-column="77" selection-end-line="140" selection-end-column="77" />
+        <state>
+          <caret column="10" selection-start-column="10" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Store.test.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="95" column="53" lean-forward="true" selection-start-line="95" selection-start-column="53" selection-end-line="95" selection-end-column="53" />
+          <folding>
+            <element signature="e#0#59#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

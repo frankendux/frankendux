@@ -1,6 +1,11 @@
 import WreckedRadio from '/Users/alexey/Desktop/own/wrecked-radio/src/WreckedRadio';
 import Store from './Store';
 
+interface ICounter {
+  likes: number;
+  dislikes: number;
+}
+
 // listenTo: ['ADD_LIKE', 'ADD_DISLIKE'],
 //   actionHandler: (action: string, section: ICounter) => {
 //   if (action === 'ADD_LIKE') {
@@ -16,7 +21,7 @@ import Store from './Store';
 //   return section;
 // },
 
-test('Store keeps and returns sections', () => {
+test('Store can return sections', () => {
   // Arrange
   const radio = new WreckedRadio();
   const store = new Store({ radio });
@@ -62,5 +67,37 @@ test('Store can return state object', () => {
   expect(state).toEqual({
     first: { one: 1, two: 2 },
     second: { three: 3, four: 4 },
+  });
+});
+
+test('Store handles updates', () => {
+  // Arrange
+  const radio = new WreckedRadio();
+  const store = new Store({ radio });
+  store.addSection({
+    name: 'counter',
+    data: { likes: 0, dislikes: 0 },
+    listenTo: ['ADD_LIKE', 'ADD_DISLIKE'],
+    actionHandler: (action: string, section: ICounter) => {
+      if (action === 'ADD_LIKE') {
+        return Object.assign({}, section, {
+          likes: section.likes + 1,
+        });
+      }
+      if (action === 'ADD_DISLIKE') {
+        return Object.assign({}, section, {
+          dislikes: section.dislikes + 1,
+        });
+      }
+      return section;
+    },
+  });
+  // Act
+  radio.channel('store').request('UPDATE', 'ADD_LIKE');
+  const counter = radio.channel('store').request('GET', 'counter');
+  // Assert
+  expect(counter).toEqual({
+    likes: 1,
+    dislikes: 0,
   });
 });
