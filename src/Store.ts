@@ -106,8 +106,8 @@ class Store {
    */
   constructor(params: IStoreParams) {
     this.radio = params.radio;
-    this.radio.getChannel('store').addRequestHandler('GET', this.getSection.bind(this));
-    this.radio.getChannel('store').addRequestHandler('UPDATE', this.updateHandler.bind(this));
+    this.radio.channel('store').reply('GET', this.getSection.bind(this));
+    this.radio.channel('store').reply('UPDATE', this.updateHandler.bind(this));
   }
   /**
    * Get specific state section
@@ -144,7 +144,7 @@ class Store {
       listeningSections.forEach((sectionName: string) => {
         const update = this.actionHandlers[sectionName](action, this.getSection(sectionName));
         this.store[sectionName] = update;
-        this.radio.getChannel('store').trigger(`${sectionName}:update`, this.getState());
+        this.radio.channel('store').trigger(`${sectionName}:update`, this.getState());
       });
     }
   }
