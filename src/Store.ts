@@ -1,4 +1,4 @@
-import { IWreckedRadio } from 'wrecked-radio';
+import { IWreckedRadio } from '/Users/alexey/Desktop/own/wrecked-radio/src/WreckedRadio';
 
 export interface IStore {
   [key:string]: any;
@@ -106,21 +106,15 @@ class Store {
    */
   constructor(params: IStoreParams) {
     this.radio = params.radio;
-    this.radio.channel('store').reply('GET', this.getSection.bind(this));
+    this.radio.channel('store').reply('GET', this.get.bind(this));
     this.radio.channel('store').reply('UPDATE', this.updateHandler.bind(this));
   }
   /**
    * Get specific state section
    * @param section - The name of a section you want to get.
    */
-  public getSection(section: string) {
-    return this.store[section];
-  }
-  /**
-   * Get whole state object
-   */
-  public getState() {
-    return this.store;
+  private get(section?: string): any {
+    return section ? this.store[section] : this.store;
   }
   /**
    * Adds a section to the store: sets default section value and registers provided action handlers
@@ -142,9 +136,9 @@ class Store {
     const listeningSections = this.listeners[action] || this.listeners[action.type]; // FIXME
     if (listeningSections) {
       listeningSections.forEach((sectionName: string) => {
-        const update = this.actionHandlers[sectionName](action, this.getSection(sectionName));
+        const update = this.actionHandlers[sectionName](action, this.get(sectionName));
         this.store[sectionName] = update;
-        this.radio.channel('store').trigger(`${sectionName}:update`, this.getState());
+        this.radio.channel('store').trigger(`${sectionName}:update`, this.get());
       });
     }
   }

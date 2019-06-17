@@ -1,4 +1,4 @@
-import WreckedRadio from 'wrecked-radio/dist/WreckedRadio.js';
+import WreckedRadio from '/Users/alexey/Desktop/own/wrecked-radio/src/WreckedRadio';
 import Store from './Store';
 
 // listenTo: ['ADD_LIKE', 'ADD_DISLIKE'],
@@ -33,14 +33,14 @@ test('Store keeps and returns sections', () => {
     actionHandler: () => null,
   });
   // Act
-  const firstSection = store.getSection('first');
-  const secondSection = store.getSection('second');
+  const firstSection = radio.channel('store').request('GET', 'first');
+  const secondSection = radio.channel('store').request('GET', 'second');
   // Assert
   expect(firstSection).toEqual({ one: 1, two: 2 });
   expect(secondSection).toEqual({ three: 3, four: 4 });
 });
 
-test('Store can return whole state object', () => {
+test('Store can return state object', () => {
   // Arrange
   const radio = new WreckedRadio();
   const store = new Store({ radio });
@@ -57,7 +57,7 @@ test('Store can return whole state object', () => {
     actionHandler: () => null,
   });
   // Act
-  const state = store.getState();
+  const state = radio.channel('store').request('GET');
   // Assert
   expect(state).toEqual({
     first: { one: 1, two: 2 },
