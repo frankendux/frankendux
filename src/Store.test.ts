@@ -156,3 +156,35 @@ test('Store handles updates then several handlers presented', () => {
     dislikes: 2,
   });
 });
+
+test('Store does nothing when receives unknown commands', () => {
+  // Arrange
+  const radio = new WreckedRadio();
+  const store = new Store({ radio });
+  store.addSection({
+    name: 'counter',
+    data: { likes: 0, dislikes: 0 },
+    listenTo: ['ADD_LIKE', 'ADD_DISLIKE'],
+    actionHandler: (action: string, section: ICounter) => {
+      if (action === 'ADD_LIKE') {
+        return Object.assign({}, section, {
+          likes: section.likes + 1,
+        });
+      }
+      if (action === 'ADD_DISLIKE') {
+        return Object.assign({}, section, {
+          dislikes: section.dislikes + 1,
+        });
+      }
+      return section;
+    },
+  });
+  // Act
+  radio.channel('store').request('UPDATE', 'WOLOLO');
+  const counter = radio.channel('store').request('GET', 'counter');
+  // Assert
+  expect(counter).toEqual({
+    likes: 0,
+    dislikes: 0,
+  });
+});
