@@ -39,3 +39,28 @@ test('Store keeps and returns sections', () => {
   expect(firstSection).toEqual({ one: 1, two: 2 });
   expect(secondSection).toEqual({ three: 3, four: 4 });
 });
+
+test('Store can return whole state object', () => {
+  // Arrange
+  const radio = new WreckedRadio();
+  const store = new Store({ radio });
+  store.addSection({
+    name: 'first',
+    data: { one: 1, two: 2 },
+    listenTo: [],
+    actionHandler: () => null,
+  });
+  store.addSection({
+    name: 'second',
+    data: { three: 3, four: 4 },
+    listenTo: [],
+    actionHandler: () => null,
+  });
+  // Act
+  const state = store.getState();
+  // Assert
+  expect(state).toEqual({
+    first: { one: 1, two: 2 },
+    second: { three: 3, four: 4 },
+  });
+});
