@@ -31,11 +31,24 @@ export interface IStoreAction {
  */
 export type IActionHandler = (action: IStoreAction, section: any) => any;
 
+/**
+ * Shape of the object that stores associations between event names (types) and section names that
+ * are listening this event.
+ */
 export interface IListenersContainer {
+  /**
+   * Key is an event name, value is an array of sectio names.
+   */
   [key:string]: string[];
 }
 
+/**
+ * Shape of the object that associates section names and related action handlers.
+ */
 export interface IActionHandlersContainer {
+  /**
+   * Key is a section name, value is an action handler.
+   */
   [key:string]: IActionHandler;
 }
 
@@ -84,7 +97,7 @@ export interface ISectionDescription {
  * ```
  * // Imports
  * import WreckedRadio from 'wrecked-radio';
- * import Store from 'frankendux';
+ * import Store, { IStoreAction } from 'frankendux';
  *
  * // Instantiation
  * const radio = new WreckedRadio();
@@ -92,28 +105,28 @@ export interface ISectionDescription {
  *
  * // Declaring a part of our application state
  * store.addSection({
- *     // Unique state section name
- *     name: 'counter',
- *     // Initial section shape and values
- *     data: {
- *         dislikes: 1,
- *         likes: 3,
- *     },
- *     // A list of action types that this section listens and handles
- *     listenTo: ['ADD_LIKE', 'ADD_DISLIKE'],
- *     // A function that performs section updates.
- *     actionHandler: (action: string, section: ICounter) => {
- *         if (action === 'ADD_LIKE') {
- *             return Object.assign({}, section, {
- *                 likes: section.likes + 1,
- *             });
- *         } else if (action === 'ADD_DISLIKE') {
- *             return Object.assign({}, section, {
- *                 dislikes: section.dislikes + 1,
- *             });
- *         }
- *         return section;
- *     },
+ *   // Unique state section name
+ *   name: 'counter',
+ *   // Initial section shape and values
+ *   data: {
+ *     dislikes: 1,
+ *     likes: 3,
+ *   },
+ *   // A list of action types that this section listens and handles
+ *   listenTo: ['ADD_LIKE', 'ADD_DISLIKE'],
+ *   // A function that performs section updates.
+ *   actionHandler: (action: IStoreAction, section: ICounter) => {
+ *     if (action.type === 'ADD_LIKE') {
+ *       return Object.assign({}, section, {
+ *         likes: section.likes + 1,
+ *       });
+ *     } else if (action.type === 'ADD_DISLIKE') {
+ *       return Object.assign({}, section, {
+ *         dislikes: section.dislikes + 1,
+ *       });
+ *     }
+ *     return section;
+ *   },
  * });
  *
  * // Then somewhere in our app we can trigger a state update
