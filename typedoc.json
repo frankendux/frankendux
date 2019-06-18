@@ -1,0 +1,6 @@
+{
+  "name": "Frankendux",
+  "readme": "./README.md",
+  "out": "../docs",
+  "exclude": "**/**.test.ts"
+}

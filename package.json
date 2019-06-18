@@ -13,20 +13,20 @@
     "@types/jest": "^24.0.15",
     "coveralls": "^3.0.4",
     "jest": "^24.8.0",
-    "rollup": "^0.67.4",
-    "rollup-plugin-terser": "^3.0.0",
-    "rollup-plugin-typescript2": "^0.18.0",
+    "rollup": "^1.15.6",
+    "rollup-plugin-terser": "^5.0.0",
+    "rollup-plugin-typescript2": "^0.21.2",
     "ts-jest": "^24.0.2",
-    "tslib": "^1.9.3",
-    "tslint": "^5.11.0",
+    "tslib": "^1.10.0",
+    "tslint": "^5.17.0",
     "tslint-config-airbnb": "^5.11.1",
     "typedoc": "^0.14.2",
-    "typescript": "^3.2.1"
+    "typescript": "^3.5.2"
   },
   "scripts": {
     "build": "rollup -c",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
-    "docs": "typedoc --name Frankendux --out ./docs --moduleResolution node --readme ./README.md --exclude **/**.test.ts ./src",
+    "docs": "typedoc --moduleResolution node ./src",
     "test": "jest"
   },
   "peerDependencies": {
