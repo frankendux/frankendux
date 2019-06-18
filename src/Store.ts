@@ -1,15 +1,35 @@
 import { IWreckedRadio } from '/Users/alexey/Desktop/own/wrecked-radio/src/WreckedRadio';
 
+/**
+ * Store shape.
+ */
 export interface IStore {
+  /**
+   * Keys are section names, values contain related data of any type (usually it's an
+   * object or an array).
+   */
   [key:string]: any;
 }
 
+/**
+ * Shape of actions that represent an event or command that should be handled by store.
+ */
 export interface IStoreAction {
+  /**
+   * Unique action name.
+   */
   type: string;
+  /**
+   * Optional data that describes an action.
+   */
   payload?: any;
 }
 
-export type IActionHandler = (action: IStoreAction, section: any) => void;
+/**
+ * Shape of functions that handle events/commands.
+ * Receives an action object and current section value and should return new updated section value.
+ */
+export type IActionHandler = (action: IStoreAction, section: any) => any;
 
 export interface IListenersContainer {
   [key:string]: string[];
@@ -19,15 +39,34 @@ export interface IActionHandlersContainer {
   [key:string]: IActionHandler;
 }
 
+/**
+ * Shape of data that should be passed to Store constructor.
+ */
 export interface IStoreParams {
+  /**
+   * Wrecked Radio instance that's necessary for communications between Store and various
+   * applicarion parts.
+   */
   radio: IWreckedRadio;
 }
 
-export interface IStoreSection {
+export interface ISectionDescription {
+  /**
+   * Unique section name
+   */
   name: string;
-  data: object;
-  actionHandler: any;
+  /**
+   * Initial section value
+   */
+  data: any;
+  /**
+   * Array of action names that this section should listen and handle
+   */
   listenTo: string[];
+  /**
+   * Action handler for this section
+   */
+  actionHandler: IActionHandler;
 }
 
 /**
@@ -98,11 +137,12 @@ class Store {
    */
   private readonly actionHandlers: IActionHandlersContainer = {};
   /**
-   * Wrecked Radio instance used for communications with different application parts (like "views" or side-effect performers)
+   * Wrecked Radio instance used for communications with different application parts (like "views"
+   * or side-effect performers).
    */
   private readonly radio: IWreckedRadio;
   /**
-   * Saves link to "wrecked-radio" instance and implements... what?
+   * Saves link to Wrecked Radio instance and starts to listen for requests in "store" channel.
    */
   constructor(params: IStoreParams) {
     this.radio = params.radio;
@@ -110,16 +150,16 @@ class Store {
     this.radio.channel('store').reply('UPDATE', this.updateHandler.bind(this));
   }
   /**
-   * Get specific state section
+   * Get specific state section or whole state object (if no section name provided)
    * @param section - The name of a section you want to get.
    */
   private get(section?: string): any {
     return section ? this.store[section] : this.store;
   }
   /**
-   * Adds a section to the store: sets default section value and registers provided action handlers
+   * Add a section to the store. Set default section value and registers provided action handlers.
    */
-  public addSection(section: IStoreSection) {
+  public addSection(section: ISectionDescription) {
     this.store[section.name] = section.data;
     section.listenTo.forEach((eventName) => {
       if (!this.listeners[eventName]) {
@@ -130,14 +170,13 @@ class Store {
     this.actionHandlers[section.name] = section.actionHandler;
   }
   /**
-   * State update handler, that notifies subscribers about state change
+   * State update handler that notifies subscribers about state change
    */
   private updateHandler(action: any) {
-    const listeningSections = this.listeners[action] || this.listeners[action.type]; // FIXME
+    const listeningSections = this.listeners[action] || this.listeners[action.type];
     if (listeningSections) {
       listeningSections.forEach((sectionName: string) => {
-        const update = this.actionHandlers[sectionName](action, this.get(sectionName));
-        this.store[sectionName] = update;
+        this.store[sectionName] = this.actionHandlers[sectionName](action, this.get(sectionName));
         this.radio.channel('store').trigger(`${sectionName}:update`, this.get());
       });
     }

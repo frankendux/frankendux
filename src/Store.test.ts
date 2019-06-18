@@ -1,5 +1,5 @@
 import WreckedRadio from '/Users/alexey/Desktop/own/wrecked-radio/src/WreckedRadio';
-import Store from './Store';
+import Store, { IStoreAction } from './Store';
 
 interface ICounter {
   likes: number;
@@ -63,13 +63,13 @@ test('Store handles updates', () => {
     name: 'counter',
     data: { likes: 0, dislikes: 0 },
     listenTo: ['ADD_LIKE', 'ADD_DISLIKE'],
-    actionHandler: (action: string, section: ICounter) => {
-      if (action === 'ADD_LIKE') {
+    actionHandler: (action: IStoreAction, section: ICounter) => {
+      if (action.type === 'ADD_LIKE') {
         return Object.assign({}, section, {
           likes: section.likes + 1,
         });
       }
-      if (action === 'ADD_DISLIKE') {
+      if (action.type === 'ADD_DISLIKE') {
         return Object.assign({}, section, {
           dislikes: section.dislikes + 1,
         });
@@ -78,7 +78,7 @@ test('Store handles updates', () => {
     },
   });
   // Act
-  radio.channel('store').request('UPDATE', 'ADD_LIKE');
+  radio.channel('store').request('UPDATE', { type: 'ADD_LIKE' });
   const counter = radio.channel('store').request('GET', 'counter');
   // Assert
   expect(counter).toEqual({
@@ -95,13 +95,13 @@ test('Store handles updates then several handlers presented', () => {
     name: 'firstCounter',
     data: { likes: 0, dislikes: 0 },
     listenTo: ['ADD_LIKE', 'ADD_DISLIKE'],
-    actionHandler: (action: string, section: ICounter) => {
-      if (action === 'ADD_LIKE') {
+    actionHandler: (action: IStoreAction, section: ICounter) => {
+      if (action.type === 'ADD_LIKE') {
         return Object.assign({}, section, {
           likes: section.likes + 1,
         });
       }
-      if (action === 'ADD_DISLIKE') {
+      if (action.type === 'ADD_DISLIKE') {
         return Object.assign({}, section, {
           dislikes: section.dislikes + 1,
         });
@@ -113,13 +113,13 @@ test('Store handles updates then several handlers presented', () => {
     name: 'secondCounter',
     data: { likes: 2, dislikes: 2 },
     listenTo: ['ADD_LIKE', 'ADD_DISLIKE'],
-    actionHandler: (action: string, section: ICounter) => {
-      if (action === 'ADD_LIKE') {
+    actionHandler: (action: IStoreAction, section: ICounter) => {
+      if (action.type === 'ADD_LIKE') {
         return Object.assign({}, section, {
           likes: section.likes + 1,
         });
       }
-      if (action === 'ADD_DISLIKE') {
+      if (action.type === 'ADD_DISLIKE') {
         return Object.assign({}, section, {
           dislikes: section.dislikes + 1,
         });
@@ -128,7 +128,7 @@ test('Store handles updates then several handlers presented', () => {
     },
   });
   // Act
-  radio.channel('store').request('UPDATE', 'ADD_LIKE');
+  radio.channel('store').request('UPDATE', { type: 'ADD_LIKE' });
   const firstCounter = radio.channel('store').request('GET', 'firstCounter');
   const secondCounter = radio.channel('store').request('GET', 'secondCounter');
   // Assert
@@ -150,13 +150,13 @@ test('Store does nothing when receives unknown commands', () => {
     name: 'counter',
     data: { likes: 0, dislikes: 0 },
     listenTo: ['ADD_LIKE', 'ADD_DISLIKE'],
-    actionHandler: (action: string, section: ICounter) => {
-      if (action === 'ADD_LIKE') {
+    actionHandler: (action: IStoreAction, section: ICounter) => {
+      if (action.type === 'ADD_LIKE') {
         return Object.assign({}, section, {
           likes: section.likes + 1,
         });
       }
-      if (action === 'ADD_DISLIKE') {
+      if (action.type === 'ADD_DISLIKE') {
         return Object.assign({}, section, {
           dislikes: section.dislikes + 1,
         });
@@ -165,7 +165,7 @@ test('Store does nothing when receives unknown commands', () => {
     },
   });
   // Act
-  radio.channel('store').request('UPDATE', 'WOLOLO');
+  radio.channel('store').request('UPDATE', { type: 'WOLOLO' });
   const counter = radio.channel('store').request('GET', 'counter');
   // Assert
   expect(counter).toEqual({
