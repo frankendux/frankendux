@@ -26,7 +26,7 @@
   "scripts": {
     "build": "rollup -c",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
-    "docs": "typedoc --out ./docs ./src",
+    "docs": "typedoc --name Frankendux --out ./docs --moduleResolution node --readme ./README.md --exclude **/**.test.ts ./src",
     "test": "jest"
   },
   "peerDependencies": {
