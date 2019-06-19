@@ -1,3 +1,8 @@
+/**
+ * State manager implementation.
+ * For more information check out [[Store]] class implementation.
+ */
+
 import { IWreckedRadio } from '/Users/alexey/Desktop/own/wrecked-radio/src/WreckedRadio';
 
 /**
@@ -37,7 +42,7 @@ export type IActionHandler = (action: IStoreAction, section: any) => any;
  */
 export interface IListenersContainer {
   /**
-   * Key is an event name, value is an array of sectio names.
+   * Key is an event name, value is an array of section names.
    */
   [key:string]: string[];
 }
