@@ -1,3 +1,5 @@
+/.idea
+
 # Library specific files and directories
 /dist
 /docs
